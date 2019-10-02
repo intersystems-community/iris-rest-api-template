@@ -1,18 +1,15 @@
 Class Sample.Person Extends (%Persistent, %JSON.Adaptor, %Populate)
 {
 
-Property Name As %VarString [ Calculated, SqlComputeCode = {set {Name}={FirstName}_" "_{LastName}}, SqlComputed ];
+Property Name As %VarString;
 
-Property LastName As %VarString;
+Property Title As %String;
 
-Property FirstName As %VarString;
+Property Company As %String;
 
 Property Phone As %VarString;
 
 Property DOB As %Date(MAXVAL = "$piece($horolog, "","", 1)");
-
-/// Index for LastName,FirstName
-Index NameIndex On (LastName, FirstName);
 
 /// Index for property DOB
 Index DOBIndex On DOB;
@@ -29,15 +26,18 @@ Storage Default
 <Value>%%CLASSNAME</Value>
 </Value>
 <Value name="2">
-<Value>LastName</Value>
+<Value>Name</Value>
 </Value>
 <Value name="3">
-<Value>FirstName</Value>
+<Value>Title</Value>
 </Value>
 <Value name="4">
-<Value>Phone</Value>
+<Value>Company</Value>
 </Value>
 <Value name="5">
+<Value>Phone</Value>
+</Value>
+<Value name="6">
 <Value>DOB</Value>
 </Value>
 </Data>

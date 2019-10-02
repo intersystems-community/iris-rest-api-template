@@ -6,6 +6,7 @@ Parameter HandleCorsRequest = 1;
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
 <Routes>
+<Route Url="/all" Method="GET" Call="GetAllPersons"/>
 <Route Url="/:id" Method="GET" Call="GetPerson"/>
 <Route Url="/:id" Method="PUT" Call="UpdatePerson"/>
 <Route Url="/:id" Method="DELETE" Call="DeletePerson"/>
@@ -13,7 +14,25 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 </Routes>
 }
 
-/// This method returns the class text for the named class
+ClassMethod GetAllPersons() As %Status
+{
+
+    #dim tSC As %Status = $$$OK
+
+    Set rset = ##class(Sample.Person).ExtentFunc()
+
+    Set %response.ContentType = ..#CONTENTTYPEJSON
+    Write "["
+    While rset.%Next() {   
+        Set person = ##class(Sample.Person).%OpenId(rset.ID)    
+        Do person.%JSONExport()
+        Write ","
+
+    }
+    Write "]"
+    Quit tSC
+}
+
 ClassMethod GetPerson(id As %Integer) As %Status
 {
 	#dim tSC As %Status = $$$OK
@@ -25,9 +44,9 @@ ClassMethod GetPerson(id As %Integer) As %Status
 
     Set person = ##class(Sample.Person).%OpenId(id)
 
-    if '$IsObject(person) Quit ..Http404()
+    If '$IsObject(person) Quit ..Http404()
 
-    d person.%JSONExport()
+    Do person.%JSONExport()
 
     Quit tSC
 }
@@ -36,17 +55,17 @@ ClassMethod CreatePerson() As %Status
 {
 	#dim tSC As %Status = $$$OK
     #dim e As %Exception.AbstractException
-    set person=##class(Sample.Person).%New()
-    set data={}.%FromJSON(%request.Content)
-    
+    Set person = ##class(Sample.Person).%New()
+    Set data = {}.%FromJSON(%request.Content)
+
 
     $$$TOE(tSC,person.%JSONImport(data))
     $$$TOE(tSC,person.%Save())
-    
-    set %response.Status=204
+
+    Set %response.Status = 204
     Set %response.ContentType = ..#CONTENTTYPEJSON
     //d data.%ToJSON()
-    d person.%JSONExport()
+    Do person.%JSONExport()
 
     Quit tSC
 }
@@ -55,18 +74,18 @@ ClassMethod UpdatePerson(id As %Integer) As %Status
 {
 	#dim tSC As %Status = $$$OK
     #dim e As %Exception.AbstractException
-    set person=##class(Sample.Person).%OpenId(id)
-    if '$IsObject(person) Return ..Http404()
-    set data={}.%FromJSON(%request.Content)
-    
+    Set person = ##class(Sample.Person).%OpenId(id)
+    If '$IsObject(person) Return ..Http404()
+    Set data = {}.%FromJSON(%request.Content)
+
 
     $$$TOE(tSC,person.%JSONImport(data))
     $$$TOE(tSC,person.%Save())
-    
-    set %response.Status=200
+
+    Set %response.Status = 200
 
     Set %response.ContentType = ..#CONTENTTYPEJSON
-    d person.%JSONExport()
+    Do person.%JSONExport()
 
     Quit tSC
 }
@@ -75,12 +94,12 @@ ClassMethod DeletePerson(id As %Integer) As %Status
 {
 	#dim tSC As %Status = $$$OK
     #dim e As %Exception.AbstractException
-    set person=##class(Sample.Person).%OpenId(id)
-    if '$IsObject(person) Return ..Http404()
-    
+    Set person = ##class(Sample.Person).%OpenId(id)
+    If '$IsObject(person) Return ..Http404()
+
     $$$TOE(tSC,person.%DeleteId(id))
-    
-    set %response.Status=200
+
+    Set %response.Status = 200
 
     Set %response.ContentType = ..#CONTENTTYPEJSON
 
