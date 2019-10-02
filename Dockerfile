@@ -20,11 +20,24 @@ COPY  ./src/cls ./src/cls
 RUN iris start $ISC_PACKAGE_INSTANCENAME quietly && \
     /bin/echo -e \
             "zn \"%SYS\"\n" \
+            " write \"Create web application ...\",!" \
+            " set webProperties(\"NameSpace\") = \"USER\"" \
+            " set webName = \"/person\"" \
+            " set webProperties(\"Enabled\") = 1" \
+            " set webProperties(\"AutheEnabled\") = 32" \
+            " set webProperties(\"DispatchClass\") = \"Sample.PersonREST\"" \
+            " set status = ##class(Security.Applications).Create(webName, .webProperties)" \
+            " write:'status \$system.Status.DisplayError(status)" \
+            " write \"Web application \"\"\"_webName_\"\"\" was created!\",!" \
+            
             " Do ##class(Security.Users).UnExpireUserPasswords(\"*\")\n" \
             "zn \"USER\"\n" \
             " Do \$system.OBJ.Load(\"/opt/app/Installer.cls\",\"ck\")\n" \
             " Set sc = ##class(App.Installer).setup(, 3)\n" \
             " If 'sc do \$zu(4, \$JOB, 1)\n" \
+
+            
+
             " halt" \
     | iris session $ISC_PACKAGE_INSTANCENAME && \
     /bin/echo -e "sys\nsys\n" \
