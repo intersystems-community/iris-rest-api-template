@@ -7,10 +7,10 @@ This needs to have git and docker installed.
 
 ## Installation 
 
-Clone/git pull the repo into any local directory
+Clone/git pull the repo into any local directory e.g. like it is shown below:
 
 ```
-$ git clone https://github.com/your-repository.git
+$ git clone git@github.com:intersystems-community/objectscript-rest-docker-template.git
 ```
 
 Open the terminal in this directory and run:
@@ -19,11 +19,14 @@ Open the terminal in this directory and run:
 $ docker-compose up -d --build
 ```
 
-or build the container with web-terminal installed from ZPM:
+or install it with ZPM client:
+```
+zpm:USER>install objectscript-rest-template
+```
 
-```
-docker-compose -f "docker-compose-zpm-webterminal.yml" up -d --build
-```
+or open the folder in VSCode and do the following:
+![rest](https://user-images.githubusercontent.com/2781759/78183327-63569800-7470-11ea-8561-c3b547ce9001.gif)
+
 
 ## How to Work With it
 
@@ -114,10 +117,6 @@ Use the related docker-compose.yml to easily setup additional parametes like por
 # Dockerfile-zpm
 
 Dockerfile-zpm builds for you a container which contains ZPM package manager client so you are able to install packages from ZPM in this container
-
-# Dockerfile-zpm-webterminal
-Dockerfile-zpm-webterminal helps to have a container with ZPM and some preloaded ZPM packages, like webterminal
-
 
 # .vscode/settings.json
 
