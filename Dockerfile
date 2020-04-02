@@ -23,7 +23,7 @@ RUN \
   set sc = ##class(App.Installer).setup() \
   zn "%SYS" \
   write "Create web application ..." \
-  set webName = "/person" \
+  set webName = "/crud" \
   set webProperties("DispatchClass") = "Sample.PersonREST" \
   set webProperties("NameSpace") = "IRISAPP" \
   set webProperties("Enabled") = 1 \

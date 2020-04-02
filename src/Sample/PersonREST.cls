@@ -6,12 +6,12 @@ Parameter HandleCorsRequest = 1;
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
 <Routes>
-<Route Url="/all" Method="GET" Call="GetAllPersons"/>
-<Route Url="/:id" Method="GET" Call="GetPerson"/>
-<Route Url="/:id" Method="PUT" Call="UpdatePerson"/>
-<Route Url="/:id" Method="DELETE" Call="DeletePerson"/>
-<Route Url="/_spec" Method="GET" Call="SwaggerSpec" Cors="true"/>
-<Route Url="/" Method="POST" Call="CreatePerson"/>
+<Route Url="/person/all" Method="GET" Call="GetAllPersons"/>
+<Route Url="/_spec" Method="GET" Call="SwaggerSpec" />
+<Route Url="/person/:id" Method="GET" Call="GetPerson"/>
+<Route Url="/person/:id" Method="PUT" Call="UpdatePerson"/>
+<Route Url="/person/:id" Method="DELETE" Call="DeletePerson"/>
+<Route Url="/person/" Method="POST" Call="CreatePerson"/>
 <!-- Swagger specs -->
  
 </Routes>
