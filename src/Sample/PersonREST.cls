@@ -114,7 +114,7 @@ ClassMethod SwaggerSpec() As %Status
   Set tSC = ##class(%REST.API).GetWebRESTApplication($NAMESPACE, %request.Application, .swagger)
   Do swagger.info.%Remove("x-ISC_Namespace")
   Set swagger.basePath = "/"
-  Set swagger.info.title = "PackageManager Registry API"
+  Set swagger.info.title = "InterSystems IRIS CRUD demo"
   Set swagger.info.version = "0.1"
   Set swagger.host = "localhost:52773"
   Return ..%ProcessResult($$$OK, swagger)

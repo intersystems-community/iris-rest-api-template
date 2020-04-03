@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-  <Document name="objectscript-rest-template.ZPM">
+  <Document name="rest-template.ZPM">
     <Module>
-      <Name>objectscript-rest-template</Name>
-      <Version>1.0.4</Version>
+      <Name>rest-template</Name>
+      <Version>1.0.5</Version>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
       <Resource Name="Sample.PKG"/>
      
        <CSPApplication 
-        Url="/person"
-        Path="/src/csp"
+        Url="/crud"
         Recurse="1"
-        Directory="{$cspdir}/person" 
+        Directory="{$cspdir}/crud" 
         MatchRoles=":{$dbrole}"
         PasswordAuthEnabled="1"
         UnauthenticatedEnabled="0"
         DispatchClass="Sample.PersonREST"
         ServeFiles="1"
-        CookiePath="/person"
+        CookiePath="/crud"
         UseCookies="2"
        />
     </Module>
