@@ -1,22 +1,40 @@
-Class Sample.PersonREST Extends %CSP.REST
+Class Sample.PersonREST Extends Sample.REST.Base
 {
 
-Parameter HandleCorsRequest = 1;
+Parameter Version = "1.0.5";
 
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
 <Routes>
-<Route Url="/person/all" Method="GET" Call="GetAllPersons"/>
-<Route Url="/_spec" Method="GET" Call="SwaggerSpec" />
-<Route Url="/person/:id" Method="GET" Call="GetPerson"/>
-<Route Url="/person/:id" Method="PUT" Call="UpdatePerson"/>
-<Route Url="/person/:id" Method="DELETE" Call="DeletePerson"/>
-<Route Url="/person/" Method="POST" Call="CreatePerson"/>
+<!-- Server Info -->
+<Route Url="/" Method="GET" Call="GetInfo" Cors="true"/>
+<!-- Get all records of Person class -->
+<Route Url="/persons/all" Method="GET" Call="GetAllPersons"/>
 <!-- Swagger specs -->
- 
+<Route Url="/_spec" Method="GET" Call="SwaggerSpec" />
+<!-- GET method to return JSON for a given person id-->
+<Route Url="/persons/:id" Method="GET" Call="GetPerson"/>
+<!-- Update a person with id-->
+<Route Url="/persons/:id" Method="PUT" Call="UpdatePerson"/>
+<!-- Delete a person with id-->
+<Route Url="/persons/:id" Method="DELETE" Call="DeletePerson"/>
+<!-- Create a person-->
+<Route Url="/persons/" Method="POST" Call="CreatePerson"/>
+
 </Routes>
 }
 
+/// PersonsREST general information
+ClassMethod GetInfo() As %Status
+{
+  SET version = ..#Version
+  SET info = {
+    "version": (version)
+  }
+  RETURN ..%ProcessResult($$$OK, info)
+}
+
+/// Retreive all the records of Sample.Person
 ClassMethod GetAllPersons() As %Status
 {
 
@@ -26,16 +44,20 @@ ClassMethod GetAllPersons() As %Status
 
     Set %response.ContentType = ..#CONTENTTYPEJSON
     Write "["
-    While rset.%Next() {   
+    if rset.%Next() {
         Set person = ##class(Sample.Person).%OpenId(rset.ID)    
         Do person.%JSONExport()
+    }
+    While rset.%Next() {   
         Write ","
-
+        Set person = ##class(Sample.Person).%OpenId(rset.ID)    
+        Do person.%JSONExport()
     }
     Write "]"
     Quit tSC
 }
 
+/// Return one record fo Sample.Person
 ClassMethod GetPerson(id As %Integer) As %Status
 {
 	#dim tSC As %Status = $$$OK
@@ -54,6 +76,7 @@ ClassMethod GetPerson(id As %Integer) As %Status
     Quit tSC
 }
 
+/// Creates a new Sample.Person record
 ClassMethod CreatePerson() As %Status
 {
 	#dim tSC As %Status = $$$OK
@@ -73,6 +96,7 @@ ClassMethod CreatePerson() As %Status
     Quit tSC
 }
 
+/// Update a record in Sample.Person with id
 ClassMethod UpdatePerson(id As %Integer) As %Status
 {
 	#dim tSC As %Status = $$$OK
@@ -93,6 +117,7 @@ ClassMethod UpdatePerson(id As %Integer) As %Status
     Quit tSC
 }
 
+/// Delete a record with id in Sample.Person
 ClassMethod DeletePerson(id As %Integer) As %Status
 {
 	#dim tSC As %Status = $$$OK
@@ -107,59 +132,6 @@ ClassMethod DeletePerson(id As %Integer) As %Status
     Set %response.ContentType = ..#CONTENTTYPEJSON
 
     Quit tSC
-}
-
-ClassMethod SwaggerSpec() As %Status
-{
-  Set tSC = ##class(%REST.API).GetWebRESTApplication($NAMESPACE, %request.Application, .swagger)
-  Do swagger.info.%Remove("x-ISC_Namespace")
-  Set swagger.basePath = "/"
-  Set swagger.info.title = "InterSystems IRIS CRUD demo"
-  Set swagger.info.version = "0.1"
-  Set swagger.host = "localhost:52773"
-  Return ..%ProcessResult($$$OK, swagger)
-}
-
-/// forms JSON error from status (if any) and sends it
-/// or sends a JSON of different types
-ClassMethod %ProcessResult(pStatus As %Status = {$$$OK}, pResult As %DynamicObject = "") As %Status [ Internal ]
-{
-  #dim %response As %CSP.Response
-  SET tSC = $$$OK
-  IF $$$ISERR(pStatus) {
-    SET %response.Status = 500
-    SET tSC = ..StatusToJSON(pStatus, .tJSON)
-    IF $isobject(tJSON) {
-      SET pResult = tJSON
-    } ELSE {
-      SET pResult = { "errors": [ { "error": "Unknown error parsing status code" } ] }
-    }
-  } 
-  ELSEIF pStatus=1 {
-    IF '$isobject(pResult){
-      SET pResult = {
-      }
-    }
-  }
-  ELSE {
-    SET %response.Status = pStatus
-    SET error = $PIECE(pStatus, " ", 2, *)
-    SET pResult = {
-      "error": (error)
-    }
-  }
-  
-  IF pResult.%Extends("%Library.DynamicAbstractObject") {
-    WRITE pResult.%ToJSON()
-  }
-  ELSEIF pResult.%Extends("%JSON.Adaptor") {
-    DO pResult.%JSONExport()
-  }
-  ELSEIF pResult.%Extends("%Stream.Object") {
-    DO pResult.OutputToDevice()
-  }
-  
-  QUIT tSC
 }
 
 }

@@ -42,17 +42,23 @@ USER>do ##class(Sample.Person).AddTestData(10)
 ```
 This will create 10 random records in Sample.Person class.
 
+
+You can get swagger Open API 2.0 documentation on:
+```
+localhost:yourport/_spec
+```
+
 This REST API exposes two GET requests: all the data and one record.
 To get all the data in JSON call:
 
 ```
-localhost:52773/crud/person/all
+localhost:52773/crud/persons/all
 ```
 
-To request the data for a particular record provide the id in GET request like 'localhost:52773/crud/person/id' . E.g.:
+To request the data for a particular record provide the id in GET request like 'localhost:52773/crud/persons/id' . E.g.:
 
 ```
-localhost:52773/crud/person/1
+localhost:52773/crud/persons/1
 ```
 
 This will return JSON data for the person with ID=1, something like that:
@@ -71,7 +77,7 @@ Create a POST request e.g. in Postman with raw data in JSON. e.g.
 
 Adjust the authorisation if needed - it is basic for container with default login and password for IRIR Community edition container
 
-and send the POST request to localhost:52773/crud/person/
+and send the POST request to localhost:52773/crud/persons/
 
 This will create a record in Sample.Person class of IRIS.
 
@@ -86,7 +92,7 @@ E.g. we want to change the record with id=5. Prepare in Postman the JSON in raw 
 
 and send the put request to:
 ```
-localhost:52773/crud/person/5
+localhost:52773/crud/persons/5
 ```
 
 # Testing DELETE request
@@ -94,7 +100,7 @@ localhost:52773/crud/person/5
 For delete request this REST API expects only the id of the record to delete. E.g. if the id=5 the following DELETE call will delete the record:
 
 ```
-localhost:52773/crud/person/5
+localhost:52773/crud/persons/5
 ```
 
 ## How to start coding

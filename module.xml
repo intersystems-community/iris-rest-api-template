@@ -11,7 +11,8 @@
        <CSPApplication 
         Url="/crud"
         Recurse="1"
-        Directory="{$cspdir}/crud" 
+        SourcePath="/web"
+        DeployPath="{$cspdir}/crud" 
         MatchRoles=":{$dbrole}"
         PasswordAuthEnabled="1"
         UnauthenticatedEnabled="0"
