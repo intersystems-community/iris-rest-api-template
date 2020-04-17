@@ -14,7 +14,7 @@ Property DOB As %Date(MAXVAL = "$piece($horolog, "","", 1)");
 /// Index for property DOB
 Index DOBIndex On DOB;
 
-ClassMethod AddTestData(amount As %Integer)
+ClassMethod AddTestData(amount As %Integer = 10)
 {
     d ..Populate(amount)
 }
