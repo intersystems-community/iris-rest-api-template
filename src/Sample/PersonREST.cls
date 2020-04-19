@@ -1,7 +1,7 @@
 Class Sample.PersonREST Extends Sample.REST.Base
 {
 
-Parameter Version = "1.0.5";
+Parameter Version = "1.0.6";
 
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
