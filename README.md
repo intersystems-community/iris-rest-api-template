@@ -1,13 +1,21 @@
 ## intersystems-iris-docker-rest-template
-This is a template for for a REST API application with  ObjectScript using Docker container for InterSystems IRIS
-The template goes also with a few files which let you immedietly compile your ObjecScript files in InterSystems IRIS Community Edition in a docker container
+This is a template of a REST API application built with ObjectScript in InterSystems IRIS.
+It also has OPEN API spec, 
+can be developed with Docker and VSCode,
+can ve deployed as ZPM module.
 
 ## Prerequisites
-This needs to have git and docker installed.
+Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
 
-## Installation 
+## Installation with ZPM
 
-Clone/git pull the repo into any local directory e.g. like it is shown below:
+zpm:USER>install rest-template
+
+## Installation for development
+
+Create your repository from template.
+
+Clone/git pull the repo into any local directory e.g. like it is shown below (here I show all the examples related to this repository, but I assume you have your own derived from the template):
 
 ```
 $ git clone git@github.com:intersystems-community/objectscript-rest-docker-template.git
@@ -17,11 +25,6 @@ Open the terminal in this directory and run:
 
 ```
 $ docker-compose up -d --build
-```
-
-or install it with ZPM client:
-```
-zpm:USER>install objectscript-rest-template
 ```
 
 or open the folder in VSCode and do the following:
