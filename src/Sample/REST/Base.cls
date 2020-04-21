@@ -107,15 +107,4 @@ ClassMethod ReportHttpStatusCode(pHttpStatus, pSC As %Status = {$$$OK}) As %Stat
   Return $$$OK
 }
 
-ClassMethod SwaggerSpec() As %Status
-{
-  Set tSC = ##class(%REST.API).GetWebRESTApplication($NAMESPACE, %request.Application, .swagger)
-  Do swagger.info.%Remove("x-ISC_Namespace")
-  Set swagger.basePath = "/crud"
-  Set swagger.info.title = "InterSystems IRIS REST CRUD demo"
-  Set swagger.info.version = "0.1"
-  Set swagger.host = "localhost:52773"
-  Return ..%ProcessResult($$$OK, swagger)
-}
-
 }
