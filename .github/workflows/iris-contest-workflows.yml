@@ -1,0 +1,15 @@
+name: objectscriptquality
+on: push
+
+jobs:
+  linux:
+    name: Linux build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Execute ObjectScript Quality Analysis
+      env:
+        JENKINS_OBJECTSCRIPTQUALITY_PASSWORD: ${{ secrets.irisContestJenkinsPass }}
+        JENKINS_OBJECTSCRIPTQUALITY_TRIGGER_ACCESS_TOKEN: ${{ secrets.irisContestJobToken }}
+      run: wget https://raw.githubusercontent.com/litesolutions/objectscriptquality-jenkins-integration/master/iris-contest-hook.sh && sh ./iris-contest-hook.sh
+
