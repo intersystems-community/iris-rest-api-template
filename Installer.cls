@@ -10,9 +10,8 @@ XData setup
 
     <Configuration>
       <Database Name="IRISAPP" Dir="/opt/irisapp/data" Create="yes"/>
-
-      <Import File="${SourceDir}" Flags="ck" Recurse="1"/>
     </Configuration>
+    <Import File="${SourceDir}" Flags="ck" Recurse="1"/>
   </Namespace>
 
 </Manifest>
