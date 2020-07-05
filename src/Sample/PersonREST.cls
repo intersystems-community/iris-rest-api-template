@@ -82,7 +82,7 @@ ClassMethod CreatePerson() As %Status
 	#dim tSC As %Status = $$$OK
     #dim e As %Exception.AbstractException
     Set person = ##class(Sample.Person).%New()
-    Set data = {}.%FromJSON(%request.Content)
+    Set data=%request.Content
 
 
     $$$TOE(tSC,person.%JSONImport(data))
@@ -103,8 +103,7 @@ ClassMethod UpdatePerson(id As %Integer) As %Status
     #dim e As %Exception.AbstractException
     Set person = ##class(Sample.Person).%OpenId(id)
     If '$IsObject(person) Return ..Http404()
-    Set data = {}.%FromJSON(%request.Content)
-
+    Set data=%request.Content
 
     $$$TOE(tSC,person.%JSONImport(data))
     $$$TOE(tSC,person.%Save())
