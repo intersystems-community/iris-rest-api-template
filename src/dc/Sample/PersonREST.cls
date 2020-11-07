@@ -1,4 +1,4 @@
-Class Sample.PersonREST Extends Sample.REST.Base
+Class dc.Sample.PersonREST Extends Sample.REST.Base
 {
 
 Parameter Version = "1.0.6";
