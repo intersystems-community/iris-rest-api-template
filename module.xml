@@ -15,7 +15,7 @@
       </Dependencies>
        <CSPApplication 
         Url="/crud"
-        DispatchClass="Sample.PersonREST"
+        DispatchClass="dc.Sample.PersonREST"
         MatchRoles=":{$dbrole}"
         PasswordAuthEnabled="1"
         UnauthenticatedEnabled="0"
