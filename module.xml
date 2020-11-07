@@ -3,7 +3,7 @@
   <Document name="rest-api-template.ZPM">
     <Module>
       <Name>rest-api-template</Name>
-      <Version>1.0.6</Version>
+      <Version>1.1.0</Version>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
       <Resource Name="dc.Sample.PKG"/>
