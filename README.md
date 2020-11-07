@@ -9,7 +9,7 @@ Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installi
 
 ## Installation with ZPM
 
-zpm:USER>install rest-template
+zpm:USER>install rest-api-template
 
 ## Installation for development
 
@@ -122,10 +122,6 @@ The script in Installer.cls will import everything you place under /src/cls into
 
 The simplest dockerfile to start IRIS and load ObjectScript from /src/cls folder
 Use the related docker-compose.yml to easily setup additional parametes like port number and where you map keys and host folders.
-
-# Dockerfile-zpm
-
-Dockerfile-zpm builds for you a container which contains ZPM package manager client so you are able to install packages from ZPM in this container
 
 # .vscode/settings.json
 
