@@ -1,9 +1,10 @@
-Class dc.Sample.PersonREST Extends Sample.REST.Base
+Class Sample.PersonREST Extends Sample.REST.Base
 {
 
 Parameter Version = "1.0.6";
 
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
+
 {
 <Routes>
 <!-- Server Info -->
@@ -20,6 +21,8 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 <Route Url="/persons/:id" Method="DELETE" Call="DeletePerson"/>
 <!-- Create a person-->
 <Route Url="/persons/" Method="POST" Call="CreatePerson"/>
+<!-- Create random persons-->
+<Route Url="/persons/gen/:amount" Method="POST" Call="CreateRandomPersons"/>
 
 </Routes>
 }
@@ -27,11 +30,11 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 /// PersonsREST general information
 ClassMethod GetInfo() As %Status
 {
-  SET version = ..#Version
-  SET info = {
+  Set version = ..#Version
+  Set info = {
     "version": (version)
   }
-  RETURN ..%ProcessResult($$$OK, info)
+  Return ..%ProcessResult($$$OK, info)
 }
 
 /// Retreive all the records of Sample.Person
@@ -44,7 +47,7 @@ ClassMethod GetAllPersons() As %Status
 
     Set %response.ContentType = ..#CONTENTTYPEJSON
     Write "["
-    if rset.%Next() {
+    If rset.%Next() {
         Set person = ##class(Sample.Person).%OpenId(rset.ID)    
         Do person.%JSONExport()
     }
@@ -63,7 +66,6 @@ ClassMethod GetPerson(id As %Integer) As %Status
 	#dim tSC As %Status = $$$OK
     #dim e As %Exception.AbstractException
 
-
     #; Set the response header to plain text
     Set %response.ContentType = ..#CONTENTTYPEJSON
 
@@ -76,6 +78,23 @@ ClassMethod GetPerson(id As %Integer) As %Status
     Quit tSC
 }
 
+/// Creates the given number of new random Sample.Person records
+ClassMethod CreateRandomPersons(amount As %Integer)
+{
+    #dim tSC As %Status = $$$OK
+    Set %response.ContentType = ..#CONTENTTYPEJSON
+    
+    Try {
+        set status = ##class(Sample.Person).AddTestData(amount)
+        $$$ThrowOnError(status)
+        Set message = "Created "_amount_" random persons in Sample.Person data"
+    } Catch(ex) {
+        Set tSC = ex.Code
+        Set message = "Server error; could not populate sample data"
+    }
+    Return ..%ProcessResult(tSC, message)
+}
+
 /// Creates a new Sample.Person record
 ClassMethod CreatePerson() As %Status
 {
@@ -83,7 +102,6 @@ ClassMethod CreatePerson() As %Status
     #dim e As %Exception.AbstractException
     Set person = ##class(Sample.Person).%New()
     Set data=%request.Content
-
 
     $$$TOE(tSC,person.%JSONImport(data))
     $$$TOE(tSC,person.%Save())

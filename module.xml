@@ -6,7 +6,7 @@
       <Version>1.1.0</Version>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
-      <Resource Name="dc.Sample.PKG"/>
+      <Resource Name="Sample.PKG"/>
       <Dependencies>
         <ModuleReference>
           <Name>swagger-ui</Name>
@@ -15,7 +15,7 @@
       </Dependencies>
        <CSPApplication 
         Url="/crud"
-        DispatchClass="dc.Sample.PersonREST"
+        DispatchClass="Sample.PersonREST"
         MatchRoles=":{$dbrole}"
         PasswordAuthEnabled="1"
         UnauthenticatedEnabled="0"
