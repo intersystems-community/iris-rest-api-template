@@ -34,7 +34,7 @@ or open the folder in VSCode and do the following:
 ## How to Work With it
 
 This template creates /crud REST web-application on IRIS which implements 4 types of communication: GET, POST, PUT and DELETE aka CRUD operations.
-These interface works with a sample persistent class Sample.Person.
+These interface works with a sample persistent class dc.Sample.Person.
 
 Open http://localhost:52773/swagger-ui/index.html to test the REST API
 
@@ -43,9 +43,9 @@ Open http://localhost:52773/swagger-ui/index.html to test the REST API
 To test GET you need to have some data. You can create it with POST request (see below), or you can create some fake testing data. to do that open IRIS terminal or web terminal on /localhost:52773/terminal/  and call:
 
 ```
-USER>do ##class(Sample.Person).AddTestData(10)
+USER>do ##class(dc.Sample.Person).AddTestData(10)
 ```
-This will create 10 random records in Sample.Person class.
+This will create 10 random records in dc.Sample.Person class.
 
 
 You can get swagger Open API 2.0 documentation on:
@@ -84,7 +84,7 @@ Adjust the authorisation if needed - it is basic for container with default logi
 
 and send the POST request to localhost:52773/crud/persons/
 
-This will create a record in Sample.Person class of IRIS.
+This will create a record in dc.Sample.Person class of IRIS.
 
 # Testing PUT request
 
