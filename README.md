@@ -1,9 +1,8 @@
-## intersystems-iris-docker-rest-template
+## intersystems-iris-rest-api-template
 
- [![Gitter](https://img.shields.io/badge/Available%20on-Intersystems%20Open%20Exchange-00b2a9.svg)](https://openexchange.intersystems.com/package/intersystems-iris-docker-rest-template)
- [![Quality Gate Status](https://community.objectscriptquality.com/api/project_badges/measure?project=intersystems_iris_community%2Fintersystems-iris-docker-rest-template&metric=alert_status)](https://community.objectscriptquality.com/dashboard?id=intersystems_iris_community%2Fintersystems-iris-docker-rest-template)
+ [![Gitter](https://img.shields.io/badge/Available%20on-Intersystems%20Open%20Exchange-00b2a9.svg)](https://openexchange.intersystems.com/package/iris-rest-api-template)
+ [![Quality Gate Status](https://community.objectscriptquality.com/api/project_badges/measure?project=intersystems_iris_community%2Firis-rest-api-template&metric=alert_status)](https://community.objectscriptquality.com/dashboard?id=intersystems_iris_community%2Firis-rest-api-template)
  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/intersystems-community/iris-rest-api-template">
-
 
 This is a template of a REST API application built with ObjectScript in InterSystems IRIS.
 It also has OPEN API spec, 
@@ -24,7 +23,7 @@ Create your repository from template.
 Clone/git pull the repo into any local directory e.g. like it is shown below (here I show all the examples related to this repository, but I assume you have your own derived from the template):
 
 ```
-$ git clone git@github.com:intersystems-community/objectscript-rest-docker-template.git
+$ git clone git@github.com:intersystems-community/iris-rest-api-template.git
 ```
 
 Open the terminal in this directory and run:
