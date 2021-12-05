@@ -1,4 +1,10 @@
 ## intersystems-iris-docker-rest-template
+
+ [![Gitter](https://img.shields.io/badge/Available%20on-Intersystems%20Open%20Exchange-00b2a9.svg)](https://openexchange.intersystems.com/package/intersystems-iris-docker-rest-template)
+ [![Quality Gate Status](https://community.objectscriptquality.com/api/project_badges/measure?project=intersystems_iris_community%2Fintersystems-iris-docker-rest-template&metric=alert_status)](https://community.objectscriptquality.com/dashboard?id=intersystems_iris_community%2Fintersystems-iris-docker-rest-template)
+ <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/intersystems-community/iris-rest-api-template">
+
+
 This is a template of a REST API application built with ObjectScript in InterSystems IRIS.
 It also has OPEN API spec, 
 can be developed with Docker and VSCode,
