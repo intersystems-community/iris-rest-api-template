@@ -20,6 +20,9 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 <Route Url="/persons/:id" Method="DELETE" Call="DeletePerson"/>
 <!-- Create a person-->
 <Route Url="/persons/" Method="POST" Call="CreatePerson"/>
+<!-- Create random persons-->
+<Route Url="/persons/gen/:amount" Method="POST" Call="CreateRandomPersons"/>
+
 
 </Routes>
 }
@@ -131,6 +134,21 @@ ClassMethod DeletePerson(id As %Integer) As %Status
     Set %response.ContentType = ..#CONTENTTYPEJSON
 
     Quit tSC
+}
+
+ClassMethod CreateRandomPersons(amount As %Integer) as %Status
+{
+#dim tSC As %Status = $$$OK
+    Set %response.ContentType = ..#CONTENTTYPEJSON
+
+    Try {
+        set status = ##class(Sample.Person).AddTestData(amount)
+        $$$ThrowOnError(status)
+        Set message = "Created "_amount_" random persons in Sample.Person data"
+    } Catch(ex) {
+        Set tSC = ex.Code
+    }
+    Return tSC
 }
 
 ClassMethod SwaggerSpec() As %Status
