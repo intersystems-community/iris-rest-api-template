@@ -55,7 +55,7 @@ This will create 10 random records in dc.Sample.Person class.
 
 You can get swagger Open API 2.0 documentation on:
 ```
-localhost:yourport/_spec
+localhost:52773/crud/_spec
 ```
 
 This REST API exposes two GET requests: all the data and one record.
