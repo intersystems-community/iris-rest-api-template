@@ -142,7 +142,7 @@ ClassMethod CreateRandomPersons(amount As %Integer) as %Status
     Set %response.ContentType = ..#CONTENTTYPEJSON
 
     Try {
-        set status = ##class(Sample.Person).AddTestData(amount)
+        set status = ##class(dc.Sample.Person).AddTestData(amount)
         $$$ThrowOnError(status)
         Set message = "Created "_amount_" random persons in Sample.Person data"
     } Catch(ex) {
