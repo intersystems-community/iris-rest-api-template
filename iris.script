@@ -1,8 +1,9 @@
-;do $System.OBJ.LoadDir("/opt/irisapp/src","ck",,1)
+    ;do $System.OBJ.LoadDir("/opt/irisapp/src","ck",,1)
 
-zn "%SYS"
-Do ##class(Security.Users).UnExpireUserPasswords("*")
+    zn "%SYS"
+    Do ##class(Security.Users).UnExpireUserPasswords("*")
+    zpm "install passwordless"
 
-zn "USER"
-zpm "load /opt/irisapp/ -v":1:1
-halt
+    zn "USER"
+    zpm "load /home/irisowner/dev/ -v":1
+    halt
