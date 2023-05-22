@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "eamodio.gitlens",
+        "georgejames.gjlocate",
+        "github.copilot",
+        "intersystems-community.servermanager",
+        "intersystems-community.sqltools-intersystems-driver",
+        "intersystems-community.vscode-objectscript",
+        "intersystems.language-server",
+        "mohsen1.prettify-json",
+        "ms-azuretools.vscode-docker",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-vscode-remote.remote-containers"
+    ]
+}
