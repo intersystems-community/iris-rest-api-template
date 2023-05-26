@@ -6,4 +6,6 @@
 
     zn "USER"
     zpm "load /home/irisowner/dev/ -v":1
+
+    zpm "install fhir-server"
     halt
