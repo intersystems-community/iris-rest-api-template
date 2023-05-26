@@ -115,3 +115,7 @@ docker run --rm --name iris-sql -d -p 9092:52773 containers.intersystems.com/int
 
 
 docker run --rm --name iris-ce -d -p 9092:52773 containers.intersystems.com/intersystems/iris-community:2023.1.0.229.0
+
+
+list all the specs:
+http://localhost:52773/api/mgmnt/
