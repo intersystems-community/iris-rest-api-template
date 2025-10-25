@@ -13,7 +13,8 @@
       },
       "active": true,
       "links": {
-        "Swagger": "${serverUrl}/swagger-ui/index.html"
+        "Swagger": "${serverUrl}/swagger-ui/index.html",
+        "Error Log": "${serverUrl}/csp/sys/op/UtilSysAppErrorNamespaces.csp"
       }
     }
 
